@@ -8,8 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userToken:null,
-    userInfo:null,
+    userToken:JSON.parse(localStorage.getItem('saveUserToken')),
+    userInfo:JSON.parse(localStorage.getItem('setUserInfo')),
     detailCategory:null,
     detailId:null,
     loginErroMsg:null
@@ -43,7 +43,8 @@ export default new Vuex.Store({
       .then(({data})=> {
         commit("setUserInfo", data.data.user)
         commit("saveUserToken", data.data.userToken)
-        localStorage.setItem("saveUserToken", data.data);
+        localStorage.setItem("setUserInfo",  JSON.stringify(data.data.user));
+        localStorage.setItem("saveUserToken",  JSON.stringify(data.data.userToken));
         router.push("/"); 
       })
       .catch((error)=> {
@@ -57,7 +58,10 @@ export default new Vuex.Store({
     },
     LOGOUT({ commit }) {
       commit("LOGOUT");
+      localStorage.removeItem("setUserInfo");
       localStorage.removeItem("saveUserToken");
+      commit("setUserInfo", null)
+        commit("saveUserToken", null)
       router.push("/"); 
     },
   },
