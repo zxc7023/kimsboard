@@ -99,12 +99,12 @@ export default {
       boardTitle: null,
       boardContent: null,
       showWrite: false,
-      userToken: null,
     };
   },
   computed: {
+    ...mapState(['userToken']),
     isWrite() {
-      if (this.userToken === null) {
+      if (!this.userToken ) {
         return false;
       } else {
         return true;
@@ -113,7 +113,6 @@ export default {
   },
   mounted() {
     this.getBoardList();
-    this.userToken = this.$store.state.userToken;
   },
   watch: {
     page(newValue, oldValue) {
@@ -122,9 +121,6 @@ export default {
           this.boardList = data.list;
         }
       });
-    },
-    "$store.state.userToken"() {
-      this.userToken = this.$store.state.userToken;
     },
   },
   methods: {

@@ -43,24 +43,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  data() {
-    return {
-      userToken: null,
-    };
-  },
-  watch: {
-    "$store.state.userToken"() {
-      this.userToken = this.$store.state.userToken;
-    },
-  },
   computed: {
+    ...mapState(['userToken']),
     isSignin() {
-      if (
-        this.userToken === null ||
-        this.userToken === undefined ||
-        this.userToken === ""
-      ) {
+      if ( !this.userToken ) {
         return true;
       } else {
         return false;
