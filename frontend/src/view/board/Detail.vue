@@ -205,7 +205,15 @@ export default {
   methods: {
     getBoardDetail() {
       // 게시글 정보 가져오기
-      axios.get("/v1/board/post/" + this.postId).then(({ data }) => {
+      let postId ;
+      if(this.postId){
+        postId = this.postId
+      } else {
+        const url = window.location.href;
+        postId = url.split('/detail/')[1]
+        
+      }
+      axios.get("/v1/board/post/" + postId).then(({ data }) => {
         if (data.code === 0) {
           // console.log(data.data);
           this.postDetail = data.data;
