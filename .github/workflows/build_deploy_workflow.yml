@@ -8,7 +8,7 @@ name: build_deploy
 env: 
   FRONT_BUCKET_NAME : vue-build-output
   PROJECT_NAME : kimsboard
-  BACK_BUCKET_NAME : webservice-deploy-storage
+  BACK_BUCKET_NAME : spring-build-output
 
 # master 브런치로 push할 때만 동작
 on:
