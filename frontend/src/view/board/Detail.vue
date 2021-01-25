@@ -183,29 +183,22 @@ export default {
       category: null,
       postId: null,
       postDetail: null,
-      userToken: null,
       showModify: false,
       boardTitle: null,
       boardContent: null,
       writeReply: null,
       loading: false,
-      userInfo:null,
     };
   },
   watch: {
-    "$store.state.userToken"() {
-      this.userToken = this.$store.state.userToken;
-    },
-    "$store.state.userInfo"() {
-      this.userInfo = this.$store.state.userInfo;
-    },
     "$store.state.detailId"() {
       this.postId = this.$store.state.detailId;
     },
   },
+  computed:{
+    ...mapState(['userToken','userInfo'])
+  },
   created() {
-    this.userToken = this.$store.state.userToken;
-    this.userInfo = this.$store.state.userInfo;
     this.postId = this.$store.state.detailId;
     this.getBoardDetail();
   },
